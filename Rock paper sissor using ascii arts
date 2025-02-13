@@ -1,0 +1,82 @@
+import random
+
+# ASCII Art for Rock, Paper, and Scissors
+rock = '''
+   _____
+  (_____)
+  (________)
+  (________)
+  (________)
+'''
+
+paper = '''
+        _______
+  -----(_______)
+        (____________)
+        (____________)
+        (____________)
+  ------(____________)
+'''
+
+scissors = '''
+   _______
+  (_______)
+  (____________)
+  (____________)
+  (_______)
+'''
+
+def get_choice():
+    print("Choose an option:")
+    print("1. Rock")
+    print("2. Paper")
+    print("3. Scissors")
+    choice = input("Enter your choice (1/2/3): ")
+    if choice == '1':
+        return 'Rock', rock
+    elif choice == '2':
+        return 'Paper', paper
+    elif choice == '3':
+        return 'Scissors', scissors
+    else:
+        print("Invalid input! Please enter 1, 2, or 3.")
+        return get_choice()
+
+def print_choices(player_choice, player_art, computer_choice, computer_art):
+    print("\nYou chose:")
+    print(player_art)
+    print(f"\nComputer chose:")
+    print(computer_art)
+
+def determine_winner(player_choice, computer_choice):
+    if player_choice == computer_choice:
+        return "It's a tie!"
+    elif (player_choice == 'Rock' and computer_choice == 'Scissors') or \
+         (player_choice == 'Paper' and computer_choice == 'Rock') or \
+         (player_choice == 'Scissors' and computer_choice == 'Paper'):
+        return "You win!"
+    else:
+        return "You lose!"
+
+def main():
+    print("Welcome to Rock, Paper, Scissors!")
+    
+    # Get player's choice and corresponding ASCII art
+    player_choice, player_art = get_choice()
+    
+    # Randomly generate computer's choice and corresponding ASCII art
+    computer_choice = random.choice(['Rock', 'Paper', 'Scissors'])
+    if computer_choice == 'Rock':
+        computer_art = rock
+    elif computer_choice == 'Paper':
+        computer_art = paper
+    else:
+        computer_art = scissors
+    
+    # Print choices and determine winner
+    print_choices(player_choice, player_art, computer_choice, computer_art)
+    result = determine_winner(player_choice, computer_choice)
+    print(f"\nResult: {result}")
+
+if __name__ == "__main__":
+    main()
